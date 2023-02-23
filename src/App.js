@@ -4,7 +4,7 @@ import Header from './Header';
 
 function App() {
   return (
-    <div className='bg-yellow-100 '>
+    <div className='bg-yellow-50 '>
       <Header />
       <hr />
       <CreateNote />

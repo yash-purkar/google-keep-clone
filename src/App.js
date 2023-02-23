@@ -4,9 +4,8 @@ import Header from './Header';
 
 function App() {
   return (
-    <div className='bg-yellow-50 '>
+    <div className='bg-yellow-50 min-h-screen'>
       <Header />
-      <hr />
       <CreateNote />
     </div>
   );

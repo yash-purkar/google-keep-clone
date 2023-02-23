@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import add from './Images/add.png';
 import remove from './Images/remove.svg';
-import delAll from './Images/deleteAll.svg'
+import delAll from './Images/deleteAll.svg';
+
+const getDataFromLocalStorage = () => {
+  const getAllData = localStorage.getItem("allData");
+  if (getAllData) {
+    return JSON.parse(getAllData)
+  }
+  // return [];
+}
 
 const CreateNote = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(getDataFromLocalStorage());
   const [errMsg, setErrMsg] = useState("");
 
   const handleClick = () => {
@@ -22,6 +30,7 @@ const CreateNote = () => {
       setData([...data, note]);
       setTitle("")
       setContent("")
+      console.log(getDataFromLocalStorage())
     }
     else {
       setErrMsg("Please Fill the data");
@@ -38,6 +47,11 @@ const CreateNote = () => {
     })
     setData(returnNotes)
   }
+
+  useEffect(() => {
+    localStorage.setItem("allData", JSON.stringify(data));
+  }, [data]);
+
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -57,18 +71,18 @@ const CreateNote = () => {
       {
         data.map((elem) => {
           return (
-            <>
-              <div key={elem.id} className="flex justify-center flex-col items-center  m-auto border border-yellow-500 w-56 mt-10 bg-white px-3 rounded-md h-28 sm:w-72 ">
 
-                <h2 className='bg-white w-full text-center px-5 py-1 tracking-wider border-b border-gray-400 font-extrabold '>{elem.title}</h2>
+            <div key={elem.id} className="flex justify-center flex-col items-center  m-auto border border-yellow-500 w-56 mt-10 bg-white px-3 rounded-md h-28 sm:w-72 ">
 
-                <p className='bg-white w-full text-center px-5 pt-2  py-2 tracking-wider font-serief overflow-auto'>{elem.content}</p>
+              <h2 className='bg-white w-full text-center px-5 py-1 tracking-wider border-b border-gray-400 font-extrabold '>{elem.title}</h2>
 
-                <button onClick={() => deleteNote(elem.id)} className=" 
+              <p className='bg-white w-full text-center px-5 pt-2  py-2 tracking-wider font-serief overflow-auto'>{elem.content}</p>
+
+              <button onClick={() => deleteNote(elem.id)} className=" 
          px-3  w-11 sm:w-12"><img src={remove} alt="remove" className='bg-white border rounded-md border-red-500' /></button>
 
-              </div>
-            </>
+            </div>
+
           )
         })
       }

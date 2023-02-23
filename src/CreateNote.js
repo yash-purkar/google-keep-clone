@@ -8,7 +8,7 @@ const getDataFromLocalStorage = () => {
   if (getAllData) {
     return JSON.parse(getAllData)
   }
-  // return [];
+  return [];
 }
 
 const CreateNote = () => {

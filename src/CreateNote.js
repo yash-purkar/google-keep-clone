@@ -41,9 +41,9 @@ const CreateNote = () => {
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
-        <input type="text" name="" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title.." className=" w-64 border h-10  border-yellow-500 rounded-xl px-3 tracking-wider placeholder-gray-500 text-gray-900 focus:outline-yellow-600 sm:w-80 md:w-96" maxLength={18} />
+        <input type="text" name="" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title.." className=" w-64 border h-10  border-yellow-500 rounded-xl px-3 tracking-wider placeholder-gray-500 text-gray-900 focus:border-yellow-600 sm:w-80 md:w-96" maxLength={18} />
 
-        <textarea name="" id="" cols="30" rows="5" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Write a note..." className=" w-64 p-4 border-2 border-yellow-500 border-t-0 rounded-lg placeholder-gray-400 tracking-wider mb-6 text-gray-900 focus:outline-yellow-600 resize-none sm:w-80 md:w-96" maxLength={50} ></textarea>
+        <textarea name="" id="" cols="30" rows="5" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Write a note..." className=" w-64 p-4 border-2 border-yellow-500 border-t-0 rounded-lg placeholder-gray-400 tracking-wider mb-6 text-gray-900 focus:border-yellow-600 resize-none sm:w-80 md:w-96" maxLength={50} ></textarea>
 
         <button onClick={handleClick} className="border-1 border-black bg-white rounded-lg  w-8 mb-3 sm:w-10 md:w-11"><img src={add} alt="add" /></button>
 

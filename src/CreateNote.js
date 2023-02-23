@@ -18,6 +18,8 @@ const CreateNote = () => {
 
   const [data, setData] = useState(getDataFromLocalStorage());
   const [errMsg, setErrMsg] = useState("");
+  const [submitMsg, setSubmitMsg] = useState("")
+  const [deleteAllMsg, setDeleteAllMsg] = useState("")
 
   const handleClick = () => {
 
@@ -30,13 +32,16 @@ const CreateNote = () => {
       setData([...data, note]);
       setTitle("")
       setContent("")
-      console.log(getDataFromLocalStorage())
+      setSubmitMsg("Note added 👇🏻")
+      setTimeout(() => {
+        setSubmitMsg("")
+      }, 1500)
     }
     else {
       setErrMsg("Please Fill the data");
       setTimeout(() => {
         setErrMsg("")
-      }, 2000)
+      }, 1500)
     }
   }
 
@@ -46,6 +51,10 @@ const CreateNote = () => {
       return elem.id !== id;
     })
     setData(returnNotes)
+    setDeleteAllMsg("Deleted✔")
+    setTimeout(() => {
+      setDeleteAllMsg("")
+    }, 1500)
   }
 
   useEffect(() => {
@@ -61,7 +70,7 @@ const CreateNote = () => {
 
         <button onClick={handleClick} className="border-1 border-black bg-white rounded-lg  w-8 mb-3 sm:w-10 md:w-11"><img src={add} alt="add" /></button>
 
-        <p className='h-3 font-bold mb-5 text-red-500 tracking-wider'>{errMsg}</p>
+        <p className={`h-3 font-bold mb-5  ${errMsg ? "text-red-500" : "text-green-500"} tracking-wider`}>{errMsg ? errMsg : (submitMsg ? submitMsg : deleteAllMsg)}</p>
       </div>
 
 
@@ -88,7 +97,13 @@ const CreateNote = () => {
       }
 
       {
-        data.length >= 1 ? <button onClick={() => setData([])} className='   tracking-wider mt-5 p-1 py-1 flex justify-center items-center w-28 m-auto ' ><img src={delAll} alt="" /></button> : null
+        data.length >= 1 ? <button onClick={() => {
+          setData([])
+          setDeleteAllMsg("Deleted✔")
+          setTimeout(() => {
+            setDeleteAllMsg("")
+          }, 1500)
+        }} className='   tracking-wider mt-5 p-1 py-1 flex justify-center items-center w-28 m-auto ' ><img src={delAll} alt="" /></button> : null
       }
 
     </>

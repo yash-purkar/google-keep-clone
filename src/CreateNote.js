@@ -18,8 +18,7 @@ const CreateNote = () => {
 
   const [data, setData] = useState(getDataFromLocalStorage());
   const [errMsg, setErrMsg] = useState("");
-  const [submitMsg, setSubmitMsg] = useState("")
-  const [deleteAllMsg, setDeleteAllMsg] = useState("")
+  const [otherMessages, setOtherMessages] = useState("");
 
   const handleClick = () => {
 
@@ -32,9 +31,11 @@ const CreateNote = () => {
       setData([...data, note]);
       setTitle("")
       setContent("")
-      setSubmitMsg("Note added 👇🏻")
+
+      setOtherMessages("Note added 👇🏻")
       setTimeout(() => {
-        setSubmitMsg("")
+
+        setOtherMessages("")
       }, 1500)
     }
     else {
@@ -51,9 +52,9 @@ const CreateNote = () => {
       return elem.id !== id;
     })
     setData(returnNotes)
-    setDeleteAllMsg("Deleted✔")
+    setOtherMessages("Deleted✔");
     setTimeout(() => {
-      setDeleteAllMsg("")
+      setOtherMessages("");
     }, 1500)
   }
 
@@ -70,7 +71,7 @@ const CreateNote = () => {
 
         <button onClick={handleClick} className="border-1 border-black bg-white rounded-lg  w-8 mb-3 sm:w-10 md:w-11"><img src={add} alt="add" /></button>
 
-        <p className={`h-3 font-bold mb-5  ${errMsg ? "text-red-500" : "text-green-500"} tracking-wider`}>{errMsg ? errMsg : (submitMsg ? submitMsg : deleteAllMsg)}</p>
+        <p className={`h-3 font-bold mb-5  ${errMsg ? "text-red-500" : "text-green-500"} tracking-wider`}>{errMsg ? errMsg : otherMessages}</p>
       </div>
 
 
@@ -99,11 +100,11 @@ const CreateNote = () => {
       {
         data.length >= 1 ? <button onClick={() => {
           setData([])
-          setDeleteAllMsg("Deleted✔")
+          setOtherMessages("All Cleared✔")
           setTimeout(() => {
-            setDeleteAllMsg("")
+            setOtherMessages("")
           }, 1500)
-        }} className='   tracking-wider mt-5 p-1 py-1 flex justify-center items-center w-28 m-auto ' ><img src={delAll} alt="" /></button> : null
+        }} className='tracking-wider mt-5 p-1 py-1 flex justify-center items-center w-28 m-auto ' ><img src={delAll} alt="" /></button> : null
       }
 
     </>
